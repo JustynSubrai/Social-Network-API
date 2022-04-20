@@ -1,0 +1,24 @@
+{
+  "name": "social-network-api",
+  "version": "1.0.0",
+  "description": "NoSQL Challenge 18 using mongoDb",
+  "main": "server.js",
+  "dependencies": {
+    "mongoose": "^6.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JustynSubrai/Social-Network-API.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JustynSubrai/Social-Network-API/issues"
+  },
+  "homepage": "https://github.com/JustynSubrai/Social-Network-API#readme"
+}

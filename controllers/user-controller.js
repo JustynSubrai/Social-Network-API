@@ -1,4 +1,4 @@
-const { User } = require('./User');
+const { User } = require('../models');
 
 const userController = {
     getAllUsers(req, res) {
@@ -12,7 +12,7 @@ const userController = {
             .then(users => res.json(users))
             .catch(err => {
                 console.log(err);
-                res.status(500).json({ message: 'Something went wrong' });
+                res.status(500).json({ message: 'Something went wrong getAlluser' });
             });
     },
 
@@ -51,7 +51,20 @@ const userController = {
         User.findOneAndDelete({ _id: params.id })
             .then(user => res.json(user))
             .catch(err => res.json(err));
+    },
+
+    addFriend({ params }, res) {
+        User.findOneAndUpdate({ _id: params.id }, { $addToSet: { friends: params.friendsId } }, { new: true })
+            .then(user => { res.json(user) })
+            .catch(err => res.json(err));
+    },
+
+    deleteFriend({ params }, res) {
+        User.findOneAndUpdate({ _id: params.id }, { $pull: { friends: params.friendsId } }, { new: true })
+            .then(user => {res.json(user)})
+            .catch(err => res.json(err));
     }
+
 };
 
 

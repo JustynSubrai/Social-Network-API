@@ -4,13 +4,14 @@
   "description": "NoSQL Challenge 18 using mongoDb",
   "main": "server.js",
   "dependencies": {
+    "express": "^4.17.3",
     "mongoose": "^6.3.0",
-    "regex": "^0.1.1"
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",

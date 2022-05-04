@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const Thought = require('./Thought');
 
 const userSchema = new Schema({
     username: {
@@ -13,34 +12,32 @@ const userSchema = new Schema({
         trim: true,
         unique: true,
         required: "Email address is required",
-        validate: [validateEmail, "Please fill a valid email address"],
-        match: [
-            /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        match: [/.+@.+..+/,
             "Please fill a valid email address",
         ],
     },
-    thoughts: [{ _id, Thought }],
-    friends: [{
-        _id,
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    }]
-});
+        thoughts: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Thought'
+        }],
+        friends: [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }]
+    },
+    {
+        toJSON: {
+            virtuals: true,
+            getters: true
+        },
+        id: false,
+    }
+);
 
-friendsCount.virtual('friendsCount').get(function () {
+userSchema.virtual('friendsCount').get(function () {
     return this.friends.length;
 });
 
-const validateEmail = (email) => {
-    const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    return re.test(email);
-};
-
-// userSchema.path('email').validate(async (email) => {
-//     const emailCount = await mongoose.models.users.countDocuments({ email })
-//     return !emailCount;
-// }, 'Email already exists');
-
-const User = model('users', userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;
